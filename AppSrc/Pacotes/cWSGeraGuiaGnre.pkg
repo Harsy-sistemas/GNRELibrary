@@ -1,0 +1,892 @@
+// cWSGeraGuiaGnre.pkg
+// Class:   cWSGeraGuiaGnre
+// Created: 20/06/2016 10:38:32
+// 
+
+use cClientWebService.pkg
+
+
+// Structs used by web service
+
+Struct tWStDadosNfe
+    string     emitente
+    string     serie
+    string     modelo
+    decimal    num_nota_fiscal
+    string     tipo_documento
+    string     chave_nfe
+    string     convenio
+    string     data_emissao
+    string     produto
+    string     vencimento
+    decimal    valor
+    decimal    icms_uf_destino
+    decimal    fcp_uf_destino
+    string     cpf
+    string     cnpj
+    string     nome_destinatario
+    string     municipio_destinatario
+    string     cod_municipio_destinat
+    string     uf_destinatario
+    string     data_recepcao
+    decimal    icms_st
+End_Struct // tWStDadosNfe
+
+
+Struct tWStListaNfe
+    tWStDadosNfe[]    itens
+End_Struct // tWStListaNfe
+
+
+Struct tWStReciboNota
+    string     emitente
+    integer    num_nota_fiscal
+    string     modelo
+    string     serie
+    string     emissao_nf
+    string     receita
+    string     status
+    string     recibo
+    string     data_recibo
+End_Struct // tWStReciboNota
+
+
+Struct tWStRetornoLote
+    integer             retorno
+    string              msg_retorno
+    integer             lote
+    tWStReciboNota[]    recibos
+End_Struct // tWStRetornoLote
+
+
+Struct tWStPdfGuias
+    uchar[]    pdf
+    string     nome
+End_Struct // tWStPdfGuias
+
+
+Struct tWStRetornoLotePDF
+    integer           retorno
+    string            msg_retorno
+    integer           lote
+    tWStPdfGuias[]    pdf_guias
+End_Struct // tWStRetornoLotePDF
+
+
+Struct tWStRecibos
+    string      emitente
+    string[]    recibo
+End_Struct // tWStRecibos
+
+
+Struct tWStGuias
+    string     emitente
+    string     serie
+    string     modelo
+    decimal    num_nota_fiscal
+    string     receita
+    string     detalhamento
+    string     tipo_documento
+    string     chave_nfe
+    string     convenio
+    string     data_emissao
+    string     status
+    string     recibo
+    string     data_recibo
+    string     produto
+    string     vencimento
+    decimal    valor
+    string     cpf
+    string     cnpj
+    string     nome_destinatario
+    string     municipio_destinatario
+    string     cod_municipio_destinat
+    string     uf_destinatario
+    string     mensagem
+    string     xml_guia
+    string     data_recepcao
+    decimal    valor_atualizado
+End_Struct // tWStGuias
+
+
+Struct tWStListaGuias
+    tWStGuias[]    guias
+    integer        retorno
+    string         msg_retorno
+End_Struct // tWStListaGuias
+
+
+Struct tWStAssinatura
+    string    Nome
+    string    Login
+    string    Senha
+    string    Razao
+    string    Fantasia
+    string    Telefone
+    string    Cep
+    string    Logradouro
+    string    Nro
+    string    Complemento
+    string    Bairro
+    string    Codigo_cidade
+    string    Codigo_uf
+    string    CNPJ
+End_Struct // tWStAssinatura
+
+
+Struct tWStRetornoAssinatura
+    string     Login
+    string     Razao
+    string     CNPJ
+    string     TokenAPI
+    integer    Retorno
+    string     Msg_retorno
+End_Struct // tWStRetornoAssinatura
+
+// 
+// Class:   cWSGeraGuiaGnre
+// 
+// Interface:
+// 
+// Function wsGeraGuia string llsEmpresa string llsUsuario string llsChaveApi tWStListaNfe llListaNfe Returns tWStRetornoLote
+// Function wsGeraGuiaPDF string llsEmpresa string llsUsuario string llsChaveApi tWStListaNfe llListaNfe Returns tWStRetornoLotePDF
+// Function wsBuscaGuiasPendentes string llsEmpresa string llsUsuario string llsChaveApi tWStRecibos llGuiasPendentes Returns tWStListaGuias
+// Function wsBuscaTodasGuiasPendentes string llsEmpresa string llsUsuario string llsChaveApi string llsDataInicio string llsDataFim Returns tWStListaGuias
+// Function wsBuscaTodasGuiasComErro string llsEmpresa string llsUsuario string llsChaveApi string llsDataInicio string llsDataFim Returns tWStListaGuias
+// Function wsBuscaGuia string llsEmpresa string llsUsuario string llsChaveApi tWStRetornoLote llLote Returns tWStListaGuias
+// Function wsBuscaGuiaPDF string llsEmpresa string llsUsuario string llsChaveApi tWStRetornoLote llLote Returns tWStRetornoLotePDF
+// Function wsAssinatura_gratis tWStAssinatura llAssinatura Returns tWStRetornoAssinatura
+// 
+// 
+
+Class cWSGeraGuiaGnre is a cClientWebService
+
+    Procedure Construct_object
+        Forward send Construct_object
+        Set psServiceLocation     to 'https://www.guiasgnre.com.br/WEBGNRE/GeraGuiaGnre.wso'
+        Set psWSDLLocation        to 'https://www.guiasgnre.com.br/WEBGNRE/GeraGuiaGnre.wso?WSDL'
+
+        Object oWStDadosNfe is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tDadosNfe"
+            Send defineParameter xsString 1 1 "emitente"
+            Send defineParameter xsString 1 1 "serie"
+            Send defineParameter xsString 1 1 "modelo"
+            Send defineParameter xsDecimal 1 1 "num_nota_fiscal"
+            Send defineParameter xsString 1 1 "tipo_documento"
+            Send defineParameter xsString 1 1 "chave_nfe"
+            Send defineParameter xsString 1 1 "convenio"
+            Send defineParameter xsString 1 1 "data_emissao"
+            Send defineParameter xsString 1 1 "produto"
+            Send defineParameter xsString 1 1 "vencimento"
+            Send defineParameter xsDecimal 1 1 "valor"
+            Send defineParameter xsDecimal 1 1 "icms_uf_destino"
+            Send defineParameter xsDecimal 1 1 "fcp_uf_destino"
+            Send defineParameter xsString 1 1 "cpf"
+            Send defineParameter xsString 1 1 "cnpj"
+            Send defineParameter xsString 1 1 "nome_destinatario"
+            Send defineParameter xsString 1 1 "municipio_destinatario"
+            Send defineParameter xsString 1 1 "cod_municipio_destinat"
+            Send defineParameter xsString 1 1 "uf_destinatario"
+            Send defineParameter xsString 1 1 "data_recepcao"
+            Send defineParameter xsDecimal 1 1 "icms_st"
+        End_Object //oWStDadosNfe
+
+        Object oWSArrayOftDadosNfe is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOftDadosNfe"
+            Set piDimensions to 1
+            Send defineStructParameter oWStDadosNfe 0 C_unbounded "tDadosNfe"
+        End_Object //oWSArrayOftDadosNfe
+
+        Object oWStListaNfe is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tListaNfe"
+            Send defineStructParameter oWSArrayOftDadosNfe 1 1 "itens"
+        End_Object //oWStListaNfe
+
+        Object oWStReciboNota is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tReciboNota"
+            Send defineParameter xsString 1 1 "emitente"
+            Send defineParameter xsInteger 1 1 "num_nota_fiscal"
+            Send defineParameter xsString 1 1 "modelo"
+            Send defineParameter xsString 1 1 "serie"
+            Send defineParameter xsString 1 1 "emissao_nf"
+            Send defineParameter xsString 1 1 "receita"
+            Send defineParameter xsString 1 1 "status"
+            Send defineParameter xsString 1 1 "recibo"
+            Send defineParameter xsString 1 1 "data_recibo"
+        End_Object //oWStReciboNota
+
+        Object oWSArrayOftReciboNota is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOftReciboNota"
+            Set piDimensions to 1
+            Send defineStructParameter oWStReciboNota 0 C_unbounded "tReciboNota"
+        End_Object //oWSArrayOftReciboNota
+
+        Object oWStRetornoLote is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tRetornoLote"
+            Send defineParameter xsInteger 1 1 "retorno"
+            Send defineParameter xsString 1 1 "msg_retorno"
+            Send defineParameter xsInteger 1 1 "lote"
+            Send defineStructParameter oWSArrayOftReciboNota 1 1 "recibos"
+        End_Object //oWStRetornoLote
+
+        Object oWSArrayOfUnsignedByte is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOfUnsignedByte"
+            Set piDimensions to 1
+            Send defineParameter xsUchar 0 C_unbounded "unsignedByte"
+        End_Object //oWSArrayOfUnsignedByte
+
+        Object oWStPdfGuias is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tPdfGuias"
+            Send defineStructParameter oWSArrayOfUnsignedByte 1 1 "pdf"
+            Send defineParameter xsString 1 1 "nome"
+        End_Object //oWStPdfGuias
+
+        Object oWSArrayOftPdfGuias is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOftPdfGuias"
+            Set piDimensions to 1
+            Send defineStructParameter oWStPdfGuias 0 C_unbounded "tPdfGuias"
+        End_Object //oWSArrayOftPdfGuias
+
+        Object oWStRetornoLotePDF is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tRetornoLotePDF"
+            Send defineParameter xsInteger 1 1 "retorno"
+            Send defineParameter xsString 1 1 "msg_retorno"
+            Send defineParameter xsInteger 1 1 "lote"
+            Send defineStructParameter oWSArrayOftPdfGuias 1 1 "pdf_guias"
+        End_Object //oWStRetornoLotePDF
+
+        Object oWSArrayOfString is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOfString"
+            Set piDimensions to 1
+            Send defineParameter xsString 0 C_unbounded "string"
+        End_Object //oWSArrayOfString
+
+        Object oWStRecibos is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tRecibos"
+            Send defineParameter xsString 1 1 "emitente"
+            Send defineStructParameter oWSArrayOfString 1 1 "recibo"
+        End_Object //oWStRecibos
+
+        Object oWStGuias is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tGuias"
+            Send defineParameter xsString 1 1 "emitente"
+            Send defineParameter xsString 1 1 "serie"
+            Send defineParameter xsString 1 1 "modelo"
+            Send defineParameter xsDecimal 1 1 "num_nota_fiscal"
+            Send defineParameter xsString 1 1 "receita"
+            Send defineParameter xsString 1 1 "detalhamento"
+            Send defineParameter xsString 1 1 "tipo_documento"
+            Send defineParameter xsString 1 1 "chave_nfe"
+            Send defineParameter xsString 1 1 "convenio"
+            Send defineParameter xsString 1 1 "data_emissao"
+            Send defineParameter xsString 1 1 "status"
+            Send defineParameter xsString 1 1 "recibo"
+            Send defineParameter xsString 1 1 "data_recibo"
+            Send defineParameter xsString 1 1 "produto"
+            Send defineParameter xsString 1 1 "vencimento"
+            Send defineParameter xsDecimal 1 1 "valor"
+            Send defineParameter xsString 1 1 "cpf"
+            Send defineParameter xsString 1 1 "cnpj"
+            Send defineParameter xsString 1 1 "nome_destinatario"
+            Send defineParameter xsString 1 1 "municipio_destinatario"
+            Send defineParameter xsString 1 1 "cod_municipio_destinat"
+            Send defineParameter xsString 1 1 "uf_destinatario"
+            Send defineParameter xsString 1 1 "mensagem"
+            Send defineParameter xsString 1 1 "xml_guia"
+            Send defineParameter xsString 1 1 "data_recepcao"
+            Send defineParameter xsDecimal 1 1 "valor_atualizado"
+        End_Object //oWStGuias
+
+        Object oWSArrayOftGuias is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set peArrayType to C_atArray
+            Set psDataType to "ArrayOftGuias"
+            Set piDimensions to 1
+            Send defineStructParameter oWStGuias 0 C_unbounded "tGuias"
+        End_Object //oWSArrayOftGuias
+
+        Object oWStListaGuias is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tListaGuias"
+            Send defineStructParameter oWSArrayOftGuias 1 1 "guias"
+            Send defineParameter xsInteger 1 1 "retorno"
+            Send defineParameter xsString 1 1 "msg_retorno"
+        End_Object //oWStListaGuias
+
+        Object oWStAssinatura is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tAssinatura"
+            Send defineParameter xsString 1 1 "Nome"
+            Send defineParameter xsString 1 1 "Login"
+            Send defineParameter xsString 1 1 "Senha"
+            Send defineParameter xsString 1 1 "Razao"
+            Send defineParameter xsString 1 1 "Fantasia"
+            Send defineParameter xsString 1 1 "Telefone"
+            Send defineParameter xsString 1 1 "Cep"
+            Send defineParameter xsString 1 1 "Logradouro"
+            Send defineParameter xsString 1 1 "Nro"
+            Send defineParameter xsString 1 1 "Complemento"
+            Send defineParameter xsString 1 1 "Bairro"
+            Send defineParameter xsString 1 1 "Codigo_cidade"
+            Send defineParameter xsString 1 1 "Codigo_uf"
+            Send defineParameter xsString 1 1 "CNPJ"
+        End_Object //oWStAssinatura
+
+        Object oWStRetornoAssinatura is a cSoapMetaStruct
+            Set psNameSpace to "http://guiasgnre/webgnre"
+            Set psDataType to "tRetornoAssinatura"
+            Send defineParameter xsString 1 1 "Login"
+            Send defineParameter xsString 1 1 "Razao"
+            Send defineParameter xsString 1 1 "CNPJ"
+            Send defineParameter xsString 1 1 "TokenAPI"
+            Send defineParameter xsInteger 1 1 "Retorno"
+            Send defineParameter xsString 1 1 "Msg_retorno"
+        End_Object //oWStRetornoAssinatura
+
+    End_Procedure // Construct_object
+
+    // 
+    // Procedure wsGeraGuia
+    // 
+    // Funá∆o de Envio dos Dados da NFe para o webservice para geraá∆o das guias. Esta
+    // funá∆o recebe uma ou mais notas e retorna uma lista com informaá‰es das guias
+    // das respectivas notas, para que sejam usadas e impressas em um gerador de
+    // relat¢rios de sua preferància. Lista de c¢digos de retorno: 0 = Sucesso | 1 =
+    // N∆o autorizado. Verifique o CNPJ, Usu†rio e Token. | 2 = Lote processado com
+    // pendàncias. | 3 = Nenhuma guia liberada no momento.
+    // 
+    Function wsGeraGuia string llsEmpresa string llsUsuario string llsChaveApi tWStListaNfe llListaNfe Returns tWStRetornoLote
+        tWStRetornoLote llGeraGuiaResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "GeraGuia"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "GeraGuiaResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineStructParameter oWStListaNfe 1 1 "ListaNfe" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llListaNfe to spParameters[3].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStRetornoLote 1 1 "GeraGuiaResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llGeraGuiaResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llGeraGuiaResult
+    End_Function // wsGeraGuia
+
+    // 
+    // Procedure wsGeraGuiaPDF
+    // 
+    // Funá∆o de Envio dos Dados da NFe para o webservice para geraá∆o das guias,
+    // porÇm j† retornando o PDF das guias pronto para ser salvo e/ou impresso ap¢s a
+    // recepá∆o do arquivo. Lista de c¢digos de retorno: 0 = Sucesso | 1 = N∆o
+    // autorizado, Verifique o CNPJ, Usu†rio e Token. | 2 = Lote processado com
+    // pendàncias. | 3 = Nenhuma guia liberada no momento. | 4 = Falha ao buscar
+    // guias. | 5 = Falha ao gerar o PDF.
+    // 
+    Function wsGeraGuiaPDF string llsEmpresa string llsUsuario string llsChaveApi tWStListaNfe llListaNfe Returns tWStRetornoLotePDF
+        tWStRetornoLotePDF llGeraGuiaPDFResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "GeraGuiaPDF"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "GeraGuiaPDFResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineStructParameter oWStListaNfe 1 1 "ListaNfe" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llListaNfe to spParameters[3].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStRetornoLotePDF 1 1 "GeraGuiaPDFResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llGeraGuiaPDFResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llGeraGuiaPDFResult
+    End_Function // wsGeraGuiaPDF
+
+    // 
+    // Procedure wsBuscaGuiasPendentes
+    // 
+    // Busca Guias que ficaram pendentes, com status de 'Transmitida' ou 'Aguardando',
+    // e n∆o foram retornadas no momento do envio do lote das notas, pois estavam em
+    // processamento pela SEFAZ de destino. Esta funá∆o recebe um ou mais recibos das
+    // guias desejadas e retorna uma lista com informaá‰es das guias dos respectivos
+    // recibos, para que sejam usadas e impressas em um gerador de relat¢rios de sua
+    // preferància. Lista de c¢digos de retorno: 0 = Sucesso | 1 = N∆o autorizado.
+    // Verifique o CNPJ, Usu†rio e Token. | 2 = Lote processado com pendàncias. | 3 =
+    // Nenhuma guia liberada no momento.
+    // 
+    Function wsBuscaGuiasPendentes string llsEmpresa string llsUsuario string llsChaveApi tWStRecibos llGuiasPendentes Returns tWStListaGuias
+        tWStListaGuias llBuscaGuiasPendentesResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "BuscaGuiasPendentes"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "BuscaGuiasPendentesResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineStructParameter oWStRecibos 1 1 "GuiasPendentes" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llGuiasPendentes to spParameters[3].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStListaGuias 1 1 "BuscaGuiasPendentesResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llBuscaGuiasPendentesResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llBuscaGuiasPendentesResult
+    End_Function // wsBuscaGuiasPendentes
+
+    // 
+    // Procedure wsBuscaTodasGuiasPendentes
+    // 
+    // Busca todas as guias que est∆o pendentes, com status 'Trasmitida' ou
+    // 'Aguardando', exceto aquelas com status 'Erro', e n∆o foram retornadas no
+    // momento do envio do lote das notas. Se informado data de inicio e fim da
+    // emiss∆o da nota, filtra apenas guias nesse intervalo de tempo. Se informado
+    // apenas data de in°cio, filtra todas a partir desta data. Se informado apenas
+    // data final, filtra todas as guias atÇ esta data. Se n∆o informar nenhuma data,
+    // retorna todas as guias com status 'Transmitida' ou 'Aguardando'. Lista de
+    // c¢digos de retorno: 0 = Sucesso | 1 = N∆o autorizado. Verifique o CNPJ, Usu†rio
+    // e Token. | 2 = Lote processado com pendàncias. | 3 = Nenhuma guia liberada no
+    // momento. | 6 = Data inicial inv†lida. Padr∆o esperado: AAAA-MM-DD. | 7 = Data
+    // final inv†lida. Padr∆o esperado: AAAA-MM-DD.
+    // 
+    Function wsBuscaTodasGuiasPendentes string llsEmpresa string llsUsuario string llsChaveApi string llsDataInicio string llsDataFim Returns tWStListaGuias
+        tWStListaGuias llBuscaTodasGuiasPendentesResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "BuscaTodasGuiasPendentes"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "BuscaTodasGuiasPendentesResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineParameter xsString 1 1 "sDataInicio" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llsDataInicio to spParameters[3].ValueTree
+
+        // Parameter 4
+        Get DefineParameter xsString 1 1 "sDataFim" "http://guiasgnre/webgnre" to spParameters[4].SoapParamDef 
+        ValueTreeSerializeParameter llsDataFim to spParameters[4].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStListaGuias 1 1 "BuscaTodasGuiasPendentesResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llBuscaTodasGuiasPendentesResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llBuscaTodasGuiasPendentesResult
+    End_Function // wsBuscaTodasGuiasPendentes
+
+    // 
+    // Procedure wsBuscaTodasGuiasComErro
+    // 
+    // Busca todas as guias que est∆o com erro, com status 'Erro', exceto aquelas com
+    // status 'Transmitida' ou 'Aguardando', e n∆o foram retornadas no momento do
+    // envio do lote das notas. Se informado data de inicio e fim da emiss∆o da nota,
+    // filtra apenas guias nesse intervalo de tempo. Se informado apenas data de
+    // in°cio, filtra todas a partir desta data. Se informado apenas data final,
+    // filtra todas as guias atÇ esta data. Se n∆o informar nenhuma data, retorna
+    // todas as guias com status 'Transmitida' ou 'Aguardando'. Lista de c¢digos de
+    // retorno: 0 = Sucesso | 1 = N∆o autorizado. Verifique o CNPJ, Usu†rio e Token. |
+    // 2 = Lote processado com pendàncias. | 3 = Nenhuma guia liberada no momento. | 6
+    // = Data inicial inv†lida. Padr∆o esperado: AAAA-MM-DD. | 7 = Data final
+    // inv†lida. Padr∆o esperado: AAAA-MM-DD.
+    // 
+    Function wsBuscaTodasGuiasComErro string llsEmpresa string llsUsuario string llsChaveApi string llsDataInicio string llsDataFim Returns tWStListaGuias
+        tWStListaGuias llBuscaTodasGuiasComErroResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "BuscaTodasGuiasComErro"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "BuscaTodasGuiasComErroResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineParameter xsString 1 1 "sDataInicio" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llsDataInicio to spParameters[3].ValueTree
+
+        // Parameter 4
+        Get DefineParameter xsString 1 1 "sDataFim" "http://guiasgnre/webgnre" to spParameters[4].SoapParamDef 
+        ValueTreeSerializeParameter llsDataFim to spParameters[4].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStListaGuias 1 1 "BuscaTodasGuiasComErroResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llBuscaTodasGuiasComErroResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llBuscaTodasGuiasComErroResult
+    End_Function // wsBuscaTodasGuiasComErro
+
+    // 
+    // Procedure wsBuscaGuia
+    // 
+    // Busca Guia(s) espec°fica(s) atravÇs do CNPJ do emitente e do n£mero do recibo
+    // (que pode ser mais de um), independente do status da guia. Lista de Erros: 0 =
+    // Sucesso | 1 = N∆o autorizado, Verifique o CNPJ, Usu†rio e Token. | 2 = Lote
+    // processado com pendàncias. | 3 = Nenhuma guia liberada no momento.
+    // 
+    Function wsBuscaGuia string llsEmpresa string llsUsuario string llsChaveApi tWStRetornoLote llLote Returns tWStListaGuias
+        tWStListaGuias llBuscaGuiaResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "BuscaGuia"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "BuscaGuiaResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineStructParameter oWStRetornoLote 1 1 "Lote" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llLote to spParameters[3].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStListaGuias 1 1 "BuscaGuiaResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llBuscaGuiaResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llBuscaGuiaResult
+    End_Function // wsBuscaGuia
+
+    // 
+    // Procedure wsBuscaGuiaPDF
+    // 
+    // Busca Guia(s) espec°fica(s) atravÇs do CNPJ do emitente e do n£mero do recibo
+    // (que pode ser mais de um), independente do status da guia. Lista de c¢digos de
+    // retorno: 0 = Sucesso | 1 = N∆o autorizado, Verifique o CNPJ, Usu†rio e Token. |
+    // 2 = Lote processado com pendàncias. | 3 = Erro ao transmitir o lote de guias. |
+    // 4 = Falha ao buscar guias. | 5 = Falha ao gerar o PDF.
+    // 
+    Function wsBuscaGuiaPDF string llsEmpresa string llsUsuario string llsChaveApi tWStRetornoLote llLote Returns tWStRetornoLotePDF
+        tWStRetornoLotePDF llBuscaGuiaPDFResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "BuscaGuiaPDF"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "BuscaGuiaPDFResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineParameter xsString 1 1 "sEmpresa" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llsEmpresa to spParameters[0].ValueTree
+
+        // Parameter 1
+        Get DefineParameter xsString 1 1 "sUsuario" "http://guiasgnre/webgnre" to spParameters[1].SoapParamDef 
+        ValueTreeSerializeParameter llsUsuario to spParameters[1].ValueTree
+
+        // Parameter 2
+        Get DefineParameter xsString 1 1 "sChaveApi" "http://guiasgnre/webgnre" to spParameters[2].SoapParamDef 
+        ValueTreeSerializeParameter llsChaveApi to spParameters[2].ValueTree
+
+        // Parameter 3
+        Get DefineStructParameter oWStRetornoLote 1 1 "Lote" "http://guiasgnre/webgnre" to spParameters[3].SoapParamDef 
+        ValueTreeSerializeParameter llLote to spParameters[3].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStRetornoLotePDF 1 1 "BuscaGuiaPDFResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llBuscaGuiaPDFResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llBuscaGuiaPDFResult
+    End_Function // wsBuscaGuiaPDF
+
+    // 
+    // Procedure wsAssinatura_gratis
+    // 
+    // Assinatura Gr†tis Ç utilizado para criar o cadastro do utilizador do serviáo.
+    // Tabela de erros: 0 = Sucesso | 1 = Login n∆o Ç um e-mail v†lido. | 2 = Login em
+    // uso, tente outro. | 3 = Senha deve estar entre 6 e 10 d°gitos. | 4 = Raz∆o
+    // Social n∆o pode estar em branco. | 5 = Fantasia n∆o pode estar em branco. | 6 =
+    // Telefone deve estar entre 10 e 11 d°gitos. | 7 = Cep deve conter 8 d°gitos. | 8
+    // = Logradouro n∆o pode estar em branco. | 9 = Nro n∆o pode ficar em branco, caso
+    // nao tenha n£mero no endereáo, preencher com S/N. | 10 = Bairro n∆o pode estar
+    // em branco. | 11 = C¢digo da UF Ç inv†lido. | 12 = C¢digo do Munic°pio Ç
+    // inv†lido. | 13 = Telefone contÇm dig°tos n∆o numÇricos. | 14 = CEP contÇm
+    // dig°tos n∆o numÇricos. | 15 = CNPJ Ç inv†lido. | 16 = CNPJ em uso por outra
+    // assinatura. | 17 = Nome do respons†vel pela assinatura n∆o pode estar em
+    // branco. | 18 = Erro ao gravar a conta do usu†rio. | 19 = Erro ao gravar os
+    // dados da empresa. | 20 = Erro ao criar a assinatura na forma de pagamento
+    // gr†tis.
+    // 
+    Function wsAssinatura_gratis tWStAssinatura llAssinatura Returns tWStRetornoAssinatura
+        tWStRetornoAssinatura llAssinatura_gratisResult
+        tSoapParameter[] spParameters
+        tSoapParameter[] spReturnParameters
+        integer eStatus
+
+        Send Reset
+        Set psSOAPAction           to ""
+        Set peSoapStyle            to ssDocument
+
+        Set psRequestNSURI         to "http://guiasgnre/webgnre"
+        Set peSoapEncoding         to seLiteral
+        Set psMethodRequest        to "Assinatura_gratis"
+        Set pbRequestBare          to false
+
+        Set psResponseNSURI        to "http://guiasgnre/webgnre"
+        Set peResponseSoapEncoding to seLiteral
+        Set psMethodResponse       to "Assinatura_gratisResponse"
+        Set pbResponseBare         to false
+
+        // Parameter 0
+        Get DefineStructParameter oWStAssinatura 1 1 "Assinatura" "http://guiasgnre/webgnre" to spParameters[0].SoapParamDef 
+        ValueTreeSerializeParameter llAssinatura to spParameters[0].ValueTree
+
+        Set pspParameters to spParameters
+
+        // Return Parameter
+        Get DefineStructParameter oWStRetornoAssinatura 1 1 "Assinatura_gratisResult" "http://guiasgnre/webgnre" to spReturnParameters[0].SoapParamDef
+        Set pspReturnParameters to spReturnParameters
+
+        Get DoInvokeService to eStatus
+        If (eStatus=wssOK) Begin
+            Get pspReturnParameters   to spReturnParameters
+            ValueTreeDeserializeParameter spReturnParameters[0].ValueTree to llAssinatura_gratisResult
+        end
+        Else Begin
+            Send LastError
+        end
+
+        Function_return llAssinatura_gratisResult
+    End_Function // wsAssinatura_gratis
+
+End_Class // cWSGeraGuiaGnre
+

@@ -1,0 +1,13 @@
+[Header]
+Mask=*.src;*.vw;*.sl;*.dg;*.rv;*.bp;*.pkg;*.wo;*.dd;*.inc;*.tpl;*.dfo;*.asp;*.asa;*.html;*.css;*.js
+Active=0
+SubDirectories=1
+WholeWordOnly=0
+SearchWhere=0
+Location=C:\webgnre\GNRELibrary\IdeSrc\administrador_FindInFiles.dsk
+[C:\webgnre\GNRELibrary\AppSrc]
+IsEnabled=1
+[C:\webgnre\GNRELibrary\DdSrc]
+IsEnabled=1
+[C:\webgnre\GNRELibrary\AppHtml]
+IsEnabled=1

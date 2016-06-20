@@ -1,0 +1,18 @@
+[C:\webgnre\GNRELibrary\AppSrc\exemplo2.vw]
+Source136=Get GGGGeraGuia (Value(oCNPJ,0)) (Value(oLogin,0)) (Value(oToken,0)) listanfe (&GGG_mensagem) (&GGG_Erro) True to listasguias  // consome o webservice
+ConditionEnabled136=0
+Condition136= 
+136=1
+Source146=End_Procedure
+ConditionEnabled146=0
+Condition146= 
+146=1
+[C:\webgnre\GNRELibrary\AppSrc\GGGwsGeraGuia.pkg]
+Source63=For contador from 0 to ((SizeOfArray(listaguia.guias))-1)
+ConditionEnabled63=0
+Condition63= 
+63=1
+Source72=Get wsBuscaGuiasPendentes of hgeraguiagnre sCNPJ sLogin sToken  GuiasPendentes  to listaGP  // consome o webservice
+ConditionEnabled72=0
+Condition72= 
+72=1

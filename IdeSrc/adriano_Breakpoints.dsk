@@ -1,0 +1,40 @@
+[C:\webgnre\GNRELibrary\AppSrc\GGGCriaAssinatura_Gratis.pkg]
+Source137=End_Function
+ConditionEnabled137=0
+Condition137= 
+137=1
+[C:\webgnre\GNRELibrary\AppSrc\GGGLerXmls.pkg]
+Source49=Set psDocumentName of hoXML to sAux
+ConditionEnabled49=0
+Condition49= 
+49=1
+Source60=Get ChildElementNS of hoNFe "http://www.portalfiscal.inf.br/nfe" "infNFe" to hoInfNFe
+ConditionEnabled60=0
+Condition60= 
+60=1
+[C:\webgnre\GNRELibrary\AppSrc\exemplo2.vw]
+Source58=Set Size to 14 142
+ConditionEnabled58=0
+Condition58= 
+58=1
+[C:\webgnre\GNRELibrary\AppSrc\Views\exemplo2.vw]
+Source299=Move (SizeOfArray(Lote.recibos)) to iSize
+ConditionEnabled299=0
+Condition299= 
+299=1
+Source362=Move (DateGetMonth(CurrentDateTime())) to iRet
+ConditionEnabled362=0
+Condition362= 
+362=1
+Source472=Send Beginning_of_Data of oGrid1
+ConditionEnabled472=0
+Condition472= 
+472=1
+Source481=Get GGGLerXmls saLista (Value(oCNPJ,0)) to ListaNFe
+ConditionEnabled481=0
+Condition481= 
+481=1
+Source492=File_Exist "C:\Temp" bExiste
+ConditionEnabled492=0
+Condition492= 
+492=1
