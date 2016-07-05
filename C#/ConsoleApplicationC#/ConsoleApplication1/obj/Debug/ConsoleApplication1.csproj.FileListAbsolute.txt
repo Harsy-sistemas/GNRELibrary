@@ -1,0 +1,12 @@
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Testes\ConsoleApplicationC#\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache

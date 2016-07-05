@@ -1,0 +1,48 @@
+Observações API:
+
+Em VB:
+-Após adicionar a referencia ao serviço, em DataType, Collection Type: System.Collections.ArrayList.
+-Deixar o App.config assim:
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="GeraGuiaGnreSoapBinding"
+                         maxReceivedMessageSize="10000000"/>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="https://www.guiasgnre.com.br/WEBGNRE/GeraGuiaGnre.wso"
+                binding="basicHttpBinding" bindingConfiguration="GeraGuiaGnreSoapBinding"
+                contract="ServiceReference1.GeraGuiaGnreSoapType" name="GeraGuiaGnreSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>
+
+
+Em C#:
+-Adicionado como WebReference;
+-Deixar o App.config assim:
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="ConsoleApplication1.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+    <applicationSettings>
+        <ConsoleApplication1.Properties.Settings>
+            <setting name="ConsoleApplication1_WebReference_GeraGuiaGnre"
+                serializeAs="String">
+                <value>https://www.guiasgnre.com.br/WEBGNRE/GeraGuiaGnre.wso</value>
+            </setting>
+        </ConsoleApplication1.Properties.Settings>
+    </applicationSettings>
+</configuration>

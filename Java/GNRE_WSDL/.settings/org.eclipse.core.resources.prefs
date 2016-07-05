@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/guiasgnre/webgnre/GeraGuiaGnre.java=UTF-8
+encoding//src/guiasgnre/webgnre/GeraGuiaGnreLocator.java=UTF-8
+encoding//src/guiasgnre/webgnre/GeraGuiaGnreSoapBindingStub.java=UTF-8
+encoding//src/guiasgnre/webgnre/GeraGuiaGnreSoapType.java=UTF-8
+encoding//src/guiasgnre/webgnre/TAssinatura.java=UTF-8
+encoding//src/guiasgnre/webgnre/TDadosNfe.java=UTF-8
+encoding//src/guiasgnre/webgnre/TGuias.java=UTF-8
+encoding//src/guiasgnre/webgnre/TListaGuias.java=UTF-8
+encoding//src/guiasgnre/webgnre/TListaNfe.java=UTF-8
+encoding//src/guiasgnre/webgnre/TPdfGuias.java=UTF-8
+encoding//src/guiasgnre/webgnre/TReciboNota.java=UTF-8
+encoding//src/guiasgnre/webgnre/TRecibos.java=UTF-8
+encoding//src/guiasgnre/webgnre/TRetornoAssinatura.java=UTF-8
+encoding//src/guiasgnre/webgnre/TRetornoLote.java=UTF-8
+encoding//src/guiasgnre/webgnre/TRetornoLotePDF.java=UTF-8

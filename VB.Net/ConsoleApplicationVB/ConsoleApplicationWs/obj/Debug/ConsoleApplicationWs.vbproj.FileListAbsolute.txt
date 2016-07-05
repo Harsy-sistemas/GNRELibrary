@@ -1,0 +1,40 @@
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe.config
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.pdb
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.xml
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbprojResolveAssemblyReference.cache
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.Resources.resources
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbproj.GenerateResource.Cache
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.exe
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.xml
+c:\users\adriano\documents\visual studio 2015\Projects\ConsoleApplicationWs\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.pdb
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe.config
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.exe
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.xml
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.pdb
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.pdb
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.xml
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbprojResolveAssemblyReference.cache
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.Resources.resources
+C:\temp\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbproj.GenerateResource.Cache
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe.config
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.exe
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.xml
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.pdb
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.pdb
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.xml
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbprojResolveAssemblyReference.cache
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.Resources.resources
+C:\Users\adriano\Documents\Visual Studio 2015\Projects\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbproj.GenerateResource.Cache
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe.config
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.exe
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.xml
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.pdb
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.exe
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.pdb
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\bin\Debug\ConsoleApplicationWs.xml
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbprojResolveAssemblyReference.cache
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.Resources.resources
+C:\Testes\ConsoleApplicationVB\ConsoleApplicationWs\obj\Debug\ConsoleApplicationWs.vbproj.GenerateResource.Cache

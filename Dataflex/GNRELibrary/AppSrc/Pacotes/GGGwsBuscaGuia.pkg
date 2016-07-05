@@ -1,0 +1,158 @@
+//----------------------------------------------------------------------------------------------
+// Pacote com funá‰es para busca de guias atravÇs do webservice do portal www.guiasgnre.com.br
+//----------------------------------------------------------------------------------------------
+//
+//----------------------------------------------------------------------------------------------
+// Autor .....: Adriano Rodrigues - Harsy Sistemas
+// Criado em..: 26/05/2016
+// Vers∆o.....: 1.0.0
+// Hist¢rico de Alteraá‰es: 
+// 
+
+//----------------------------------------------------------------------------------------------
+// ParÉmetros usados nas funá‰es:
+// 1 - String sCNPJ: CNPJ do usu†rio.
+// 2 - String sLogin: Login do usu†rio.
+// 3 - String sToken: Token / chave_api.
+// 4 - tWStRetornoLote: Lote com os recibos e status das guias geradas para efeutar a busca no 
+// portal.
+// 5 - tWStRecibos: Lista de recibos das guias pendentes, a serem consultadas.
+//----------------------------------------------------------------------------------------------
+// Retornos das funá‰es: 
+// -tWStListaGuias: Retorna o lote com as guias, contendo seus recibos, status e demais 
+// informaá‰es das guias geradas e mensagem de erro.
+// -tWStRetornoLotePDF: Retorna o lote com as guias em PDF, prontas para serem impressas.
+//----------------------------------------------------------------------------------------------
+// Lista de c¢digos de retorno: 
+// 0 = Sucesso
+// 1 = N∆o autorizado. Verifique o CNPJ, Usu†rio e Token.
+// 2 = Lote processado com pendàncias.
+// 3 = Nenhuma guia liberada no momento.
+// 4 = Falha ao buscar guias. 
+// 5 = Falha ao gerar o PDF.
+// 6 = Data inicial inv†lida. Padr∆o esperado: AAAA-MM-DD. 
+// 7 = Data final inv†lida. Padr∆o esperado: AAAA-MM-DD.
+//----------------------------------------------------------------------------------------------
+
+Use Pacotes\cWSGeraGuiaGnre.pkg
+
+
+// Busca Guia(s) espec°fica(s) atravÇs do CNPJ do emitente e do n£mero do recibo
+// (que pode ser mais de um), independente do status da guia.
+Function GGGBuscaGuia Global String sCNPJ String sLogin String sToken tWStRetornoLote llRetornoLote Returns tWStListaGuias
+    
+    Handle hGeraGuiaGnre                // Handle do objeto.
+    tWStListaGuias ListaGuias           // Lote com o retorno das guias geradas, com os recibos, status e demais informaá‰es das guias.
+    
+    Get Create u_cWSGeraGuiaGnre to hGeraGuiaGnre
+    If not hGeraGuiaGnre ;
+    Begin
+        Send Info_Box 'Erro ao criar o objeto da classe cWSGeraGuiaGnre!'
+        Procedure_Return
+    End
+    
+    Get wsBuscaGuia of hGeraGuiaGnre sCNPJ sLogin sToken llRetornoLote to ListaGuias
+    
+    Send Destroy of hGeraGuiaGnre
+    
+    Function_Return ListaGuias
+End_Function
+
+
+// Busca Guias que ficaram pendentes, com status de 'Transmitida' ou 'Aguardando',
+// e n∆o foram retornadas no momento do envio do lote das notas, pois estavam em
+// processamento pela SEFAZ de destino. Esta funá∆o recebe um ou mais recibos das
+// guias desejadas e retorna uma lista com informaá‰es das guias dos respectivos
+// recibos, para que sejam usadas e impressas em um gerador de relat¢rios de sua
+// preferància, salvas em banco de dados, etc.
+Function GGGBuscaGuiasPendentes Global String sCNPJ String sLogin String sToken tWStRecibos llGuiasPendentes Returns tWStListaGuias
+    
+    Handle hGeraGuiaGnre                // Handle do objeto.
+    tWStListaGuias ListaGuias           // Lote com o retorno das guias geradas, com os recibos, status e demais informaá‰es das guias.
+        
+    Get Create u_cWSGeraGuiaGnre to hGeraGuiaGnre
+    If not hGeraGuiaGnre ;
+    Begin
+        Send Info_Box 'Erro ao criar o objeto da classe cWSGeraGuiaGnre!'
+        Procedure_Return
+    End
+    
+    Get wsBuscaGuiasPendentes of hGeraGuiaGnre sCNPJ sLogin sToken llGuiasPendentes to ListaGuias
+    
+    Send Destroy of hGeraGuiaGnre
+    Function_Return ListaGuias
+End_Function
+
+
+// Busca todas as guias que est∆o pendentes, com status 'Trasmitida' ou
+// 'Aguardando', exceto aquelas com status 'Erro', e n∆o foram retornadas no
+// momento do envio do lote das notas. Se informado data de inicio e fim da
+// emiss∆o da nota, filtra apenas guias nesse intervalo de tempo. Se informado
+// apenas data de in°cio, filtra todas a partir desta data. Se informado apenas
+// data final, filtra todas as guias atÇ esta data. Se n∆o informar nenhuma data,
+// retorna todas as guias com status 'Transmitida' ou 'Aguardando'.
+Function GGGBuscaTodasGuiasPendentes String sCNPJ String sLogin String sToken String sDataInicio String sDataFim Returns tWStListaGuias
+    
+    Handle hGeraGuiaGnre                // Handle do objeto.
+    tWStListaGuias ListaGuias           // Lote com o retorno das guias geradas, com os recibos, status e demais informaá‰es das guias.
+        
+    Get Create u_cWSGeraGuiaGnre to hGeraGuiaGnre
+    If not hGeraGuiaGnre ;
+    Begin
+        Send Info_Box 'Erro ao criar o objeto da classe cWSGeraGuiaGnre!'
+        Procedure_Return
+    End
+    
+    Get wsBuscaTodasGuiasPendentes of hGeraGuiaGnre sCNPJ sLogin sToken sDataInicio sDataFim to ListaGuias
+    
+    Send Destroy of hGeraGuiaGnre
+    Function_Return ListaGuias
+End_Function
+
+
+// Busca todas as guias com erro em um intervalo de tempo passado como parÉmetro, e
+// tenta retransmit°-las para a SEFAZ de destino e trazer o resultado desse reenvio. 
+// Se passado apenas a data inicial, ele buscar† as guias com erro a partir (e inclusive) 
+// desta data. Se passado apenas a data final, ele buscar† todas as guias com erro, desde
+// o primeiro registro da empresa no sistema, atÇ esta data informada. Se nenhuma data for 
+// informada, ele buscar† em todos os registros da empresa por guias com erro, o que pode 
+// demorar demais. Formato esperado da data: AAAA-MM-DD.
+Function GGGBuscaTodasGuiasComErro Global String sCNPJ String sLogin String sToken String sDataInicial String sDataFinal Returns tWStListaGuias
+    
+    Handle hGeraGuiaGnre                // Handle do objeto.
+    tWStListaGuias ListaGuias           // Lote com o retorno das guias geradas, com os recibos, status e demais informaá‰es das guias.
+        
+    Get Create u_cWSGeraGuiaGnre to hGeraGuiaGnre
+    If not hGeraGuiaGnre ;
+    Begin
+        Send Info_Box 'Erro ao criar o objeto da classe cWSGeraGuiaGnre!'
+        Procedure_Return
+    End
+    
+    Get wsBuscaTodasGuiasComErro of hGeraGuiaGnre sCNPJ sLogin sToken sDataInicial sDataFinal to ListaGuias
+    
+    Send Destroy of hGeraGuiaGnre
+    Function_Return ListaGuias
+End_Function
+
+
+// Busca Guia(s) espec°fica(s) atravÇs do CNPJ do emitente e do n£mero do recibo
+// (que pode ser mais de um), independente do status da guia, retornando o PDF 
+// referente a esta(s) guia(s).
+Function GGGBuscaGuiaPDF String sCNPJ String sLogin String sToken tWStRetornoLote llLote Returns tWStRetornoLotePDF
+    
+    Handle hGeraGuiaGnre                // Handle do objeto.
+    tWStRetornoLotePDF RetornoLotePDF   // Lote com o retorno das guias geradas, em PDF.
+    
+    Get Create u_cWSGeraGuiaGnre to hGeraGuiaGnre
+    If not hGeraGuiaGnre ;
+    Begin
+        Send Info_Box 'Erro ao criar o objeto da classe cWSGeraGuiaGnre!'
+        Procedure_Return
+    End
+    
+    Get wsBuscaGuiaPDF of hGeraGuiaGnre sCNPJ sLogin sToken llLote to RetornoLotePDF
+    
+    Send Destroy of hGeraGuiaGnre
+    Function_Return RetornoLotePDF
+End_Function

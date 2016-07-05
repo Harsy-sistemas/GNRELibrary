@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guiasgnre/webgnre" name="GeraGuiaGnre" targetNamespace="http://guiasgnre/webgnre">
+  <types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://guiasgnre/webgnre">
+      <xs:complexType name="tListaNfe">
+        <xs:sequence>
+          <xs:element name="itens" type="tns:ArrayOftDadosNfe"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tDadosNfe">
+        <xs:sequence>
+          <xs:element name="emitente" type="xs:string"/>
+          <xs:element name="serie" type="xs:string"/>
+          <xs:element name="modelo" type="xs:string"/>
+          <xs:element name="num_nota_fiscal" type="xs:decimal"/>
+          <xs:element name="tipo_documento" type="xs:string"/>
+          <xs:element name="chave_nfe" type="xs:string"/>
+          <xs:element name="convenio" type="xs:string"/>
+          <xs:element name="data_emissao" type="xs:string"/>
+          <xs:element name="produto" type="xs:string"/>
+          <xs:element name="vencimento" type="xs:string"/>
+          <xs:element name="valor" type="xs:decimal"/>
+          <xs:element name="icms_uf_destino" type="xs:decimal"/>
+          <xs:element name="fcp_uf_destino" type="xs:decimal"/>
+          <xs:element name="cpf" type="xs:string"/>
+          <xs:element name="cnpj" type="xs:string"/>
+          <xs:element name="nome_destinatario" type="xs:string"/>
+          <xs:element name="municipio_destinatario" type="xs:string"/>
+          <xs:element name="cod_municipio_destinat" type="xs:string"/>
+          <xs:element name="uf_destinatario" type="xs:string"/>
+          <xs:element name="data_recepcao" type="xs:string"/>
+          <xs:element name="icms_st" type="xs:decimal"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tRetornoLote">
+        <xs:sequence>
+          <xs:element name="retorno" type="xs:int"/>
+          <xs:element name="msg_retorno" type="xs:string"/>
+          <xs:element name="lote" type="xs:int"/>
+          <xs:element name="recibos" type="tns:ArrayOftReciboNota"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tReciboNota">
+        <xs:sequence>
+          <xs:element name="emitente" type="xs:string"/>
+          <xs:element name="num_nota_fiscal" type="xs:int"/>
+          <xs:element name="modelo" type="xs:string"/>
+          <xs:element name="serie" type="xs:string"/>
+          <xs:element name="emissao_nf" type="xs:string"/>
+          <xs:element name="receita" type="xs:string"/>
+          <xs:element name="status" type="xs:string"/>
+          <xs:element name="recibo" type="xs:string"/>
+          <xs:element name="data_recibo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tRetornoLotePDF">
+        <xs:sequence>
+          <xs:element name="retorno" type="xs:int"/>
+          <xs:element name="msg_retorno" type="xs:string"/>
+          <xs:element name="lote" type="xs:int"/>
+          <xs:element name="pdf_guias" type="tns:ArrayOftPdfGuias"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tPdfGuias">
+        <xs:sequence>
+          <xs:element name="pdf" type="tns:ArrayOfUnsignedByte"/>
+          <xs:element name="nome" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tRecibos">
+        <xs:sequence>
+          <xs:element name="emitente" type="xs:string"/>
+          <xs:element name="recibo" type="tns:ArrayOfString"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tListaGuias">
+        <xs:sequence>
+          <xs:element name="guias" type="tns:ArrayOftGuias"/>
+          <xs:element name="retorno" type="xs:int"/>
+          <xs:element name="msg_retorno" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tGuias">
+        <xs:sequence>
+          <xs:element name="emitente" type="xs:string"/>
+          <xs:element name="serie" type="xs:string"/>
+          <xs:element name="modelo" type="xs:string"/>
+          <xs:element name="num_nota_fiscal" type="xs:decimal"/>
+          <xs:element name="receita" type="xs:string"/>
+          <xs:element name="detalhamento" type="xs:string"/>
+          <xs:element name="tipo_documento" type="xs:string"/>
+          <xs:element name="chave_nfe" type="xs:string"/>
+          <xs:element name="convenio" type="xs:string"/>
+          <xs:element name="data_emissao" type="xs:string"/>
+          <xs:element name="status" type="xs:string"/>
+          <xs:element name="recibo" type="xs:string"/>
+          <xs:element name="data_recibo" type="xs:string"/>
+          <xs:element name="produto" type="xs:string"/>
+          <xs:element name="vencimento" type="xs:string"/>
+          <xs:element name="valor" type="xs:decimal"/>
+          <xs:element name="cpf" type="xs:string"/>
+          <xs:element name="cnpj" type="xs:string"/>
+          <xs:element name="nome_destinatario" type="xs:string"/>
+          <xs:element name="municipio_destinatario" type="xs:string"/>
+          <xs:element name="cod_municipio_destinat" type="xs:string"/>
+          <xs:element name="uf_destinatario" type="xs:string"/>
+          <xs:element name="mensagem" type="xs:string"/>
+          <xs:element name="xml_guia" type="xs:string"/>
+          <xs:element name="data_recepcao" type="xs:string"/>
+          <xs:element name="valor_atualizado" type="xs:decimal"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tAssinatura">
+        <xs:sequence>
+          <xs:element name="Nome" type="xs:string"/>
+          <xs:element name="Login" type="xs:string"/>
+          <xs:element name="Senha" type="xs:string"/>
+          <xs:element name="Razao" type="xs:string"/>
+          <xs:element name="Fantasia" type="xs:string"/>
+          <xs:element name="Telefone" type="xs:string"/>
+          <xs:element name="Cep" type="xs:string"/>
+          <xs:element name="Logradouro" type="xs:string"/>
+          <xs:element name="Nro" type="xs:string"/>
+          <xs:element name="Complemento" type="xs:string"/>
+          <xs:element name="Bairro" type="xs:string"/>
+          <xs:element name="Codigo_cidade" type="xs:string"/>
+          <xs:element name="Codigo_uf" type="xs:string"/>
+          <xs:element name="CNPJ" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tRetornoAssinatura">
+        <xs:sequence>
+          <xs:element name="Login" type="xs:string"/>
+          <xs:element name="Razao" type="xs:string"/>
+          <xs:element name="CNPJ" type="xs:string"/>
+          <xs:element name="TokenAPI" type="xs:string"/>
+          <xs:element name="Retorno" type="xs:int"/>
+          <xs:element name="Msg_retorno" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOftDadosNfe">
+        <xs:sequence>
+          <xs:element name="tDadosNfe" type="tns:tDadosNfe" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOftReciboNota">
+        <xs:sequence>
+          <xs:element name="tReciboNota" type="tns:tReciboNota" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOftPdfGuias">
+        <xs:sequence>
+          <xs:element name="tPdfGuias" type="tns:tPdfGuias" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfUnsignedByte">
+        <xs:sequence>
+          <xs:element name="unsignedByte" type="xs:unsignedByte" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfString">
+        <xs:sequence>
+          <xs:element name="string" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOftGuias">
+        <xs:sequence>
+          <xs:element name="tGuias" type="tns:tGuias" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GeraGuia">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="ListaNfe" type="tns:tListaNfe"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeraGuiaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="GeraGuiaResult" type="tns:tRetornoLote"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeraGuiaPDF">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="ListaNfe" type="tns:tListaNfe"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GeraGuiaPDFResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="GeraGuiaPDFResult" type="tns:tRetornoLotePDF"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuiasPendentes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="GuiasPendentes" type="tns:tRecibos"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuiasPendentesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="BuscaGuiasPendentesResult" type="tns:tListaGuias"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaTodasGuiasPendentes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="sDataInicio" type="xs:string"/>
+            <xs:element name="sDataFim" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaTodasGuiasPendentesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="BuscaTodasGuiasPendentesResult" type="tns:tListaGuias"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaTodasGuiasComErro">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="sDataInicio" type="xs:string"/>
+            <xs:element name="sDataFim" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaTodasGuiasComErroResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="BuscaTodasGuiasComErroResult" type="tns:tListaGuias"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuia">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="Lote" type="tns:tRetornoLote"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuiaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="BuscaGuiaResult" type="tns:tListaGuias"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuiaPDF">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sEmpresa" type="xs:string"/>
+            <xs:element name="sUsuario" type="xs:string"/>
+            <xs:element name="sChaveApi" type="xs:string"/>
+            <xs:element name="Lote" type="tns:tRetornoLote"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BuscaGuiaPDFResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="BuscaGuiaPDFResult" type="tns:tRetornoLotePDF"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Assinatura_gratis">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Assinatura" type="tns:tAssinatura"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Assinatura_gratisResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Assinatura_gratisResult" type="tns:tRetornoAssinatura"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="GeraGuiaSoapRequest">
+    <part name="parameters" element="tns:GeraGuia"/>
+  </message>
+  <message name="GeraGuiaSoapResponse">
+    <part name="parameters" element="tns:GeraGuiaResponse"/>
+  </message>
+  <message name="GeraGuiaPDFSoapRequest">
+    <part name="parameters" element="tns:GeraGuiaPDF"/>
+  </message>
+  <message name="GeraGuiaPDFSoapResponse">
+    <part name="parameters" element="tns:GeraGuiaPDFResponse"/>
+  </message>
+  <message name="BuscaGuiasPendentesSoapRequest">
+    <part name="parameters" element="tns:BuscaGuiasPendentes"/>
+  </message>
+  <message name="BuscaGuiasPendentesSoapResponse">
+    <part name="parameters" element="tns:BuscaGuiasPendentesResponse"/>
+  </message>
+  <message name="BuscaTodasGuiasPendentesSoapRequest">
+    <part name="parameters" element="tns:BuscaTodasGuiasPendentes"/>
+  </message>
+  <message name="BuscaTodasGuiasPendentesSoapResponse">
+    <part name="parameters" element="tns:BuscaTodasGuiasPendentesResponse"/>
+  </message>
+  <message name="BuscaTodasGuiasComErroSoapRequest">
+    <part name="parameters" element="tns:BuscaTodasGuiasComErro"/>
+  </message>
+  <message name="BuscaTodasGuiasComErroSoapResponse">
+    <part name="parameters" element="tns:BuscaTodasGuiasComErroResponse"/>
+  </message>
+  <message name="BuscaGuiaSoapRequest">
+    <part name="parameters" element="tns:BuscaGuia"/>
+  </message>
+  <message name="BuscaGuiaSoapResponse">
+    <part name="parameters" element="tns:BuscaGuiaResponse"/>
+  </message>
+  <message name="BuscaGuiaPDFSoapRequest">
+    <part name="parameters" element="tns:BuscaGuiaPDF"/>
+  </message>
+  <message name="BuscaGuiaPDFSoapResponse">
+    <part name="parameters" element="tns:BuscaGuiaPDFResponse"/>
+  </message>
+  <message name="Assinatura_gratisSoapRequest">
+    <part name="parameters" element="tns:Assinatura_gratis"/>
+  </message>
+  <message name="Assinatura_gratisSoapResponse">
+    <part name="parameters" element="tns:Assinatura_gratisResponse"/>
+  </message>
+  <portType name="GeraGuiaGnreSoapType">
+    <operation name="GeraGuia">
+      <documentation>Função de Envio dos Dados da NFe para o webservice para geração das guias. Esta função recebe uma ou mais notas e retorna uma lista com informações das guias das respectivas notas, para que sejam usadas e impressas em um gerador de relatórios de sua preferência. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado. Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento.</documentation>
+      <input message="tns:GeraGuiaSoapRequest"/>
+      <output message="tns:GeraGuiaSoapResponse"/>
+    </operation>
+    <operation name="GeraGuiaPDF">
+      <documentation>Função de Envio dos Dados da NFe para o webservice para geração das guias, porém já retornando o PDF das guias pronto para ser salvo e/ou impresso após a recepção do arquivo. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado, Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento. | 4 = Falha ao buscar guias. | 5 = Falha ao gerar o PDF.</documentation>
+      <input message="tns:GeraGuiaPDFSoapRequest"/>
+      <output message="tns:GeraGuiaPDFSoapResponse"/>
+    </operation>
+    <operation name="BuscaGuiasPendentes">
+      <documentation>Busca Guias que ficaram pendentes, com status de 'Transmitida' ou 'Aguardando', e não foram retornadas no momento do envio do lote das notas, pois estavam em processamento pela SEFAZ de destino. Esta função recebe um ou mais recibos das guias desejadas e retorna uma lista com informações das guias dos respectivos recibos, para que sejam usadas e impressas em um gerador de relatórios de sua preferência. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado. Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento.</documentation>
+      <input message="tns:BuscaGuiasPendentesSoapRequest"/>
+      <output message="tns:BuscaGuiasPendentesSoapResponse"/>
+    </operation>
+    <operation name="BuscaTodasGuiasPendentes">
+      <documentation>Busca todas as guias que estão pendentes, com status 'Trasmitida' ou 'Aguardando', exceto aquelas com status 'Erro', e não foram retornadas no momento do envio do lote das notas. Se informado data de inicio e fim da emissão da nota, filtra apenas guias nesse intervalo de tempo. Se informado apenas data de início, filtra todas a partir desta data. Se informado apenas data final, filtra todas as guias até esta data. Se não informar nenhuma data, retorna todas as guias com status 'Transmitida' ou 'Aguardando'. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado. Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento. | 6 = Data inicial inválida. Padrão esperado: AAAA-MM-DD. | 7 = Data final inválida. Padrão esperado: AAAA-MM-DD.</documentation>
+      <input message="tns:BuscaTodasGuiasPendentesSoapRequest"/>
+      <output message="tns:BuscaTodasGuiasPendentesSoapResponse"/>
+    </operation>
+    <operation name="BuscaTodasGuiasComErro">
+      <documentation>Busca todas as guias que estão com erro, com status 'Erro', exceto aquelas com status 'Transmitida' ou 'Aguardando', e não foram retornadas no momento do envio do lote das notas. Se informado data de inicio e fim da emissão da nota, filtra apenas guias nesse intervalo de tempo. Se informado apenas data de início, filtra todas a partir desta data. Se informado apenas data final, filtra todas as guias até esta data. Se não informar nenhuma data, retorna todas as guias com status 'Transmitida' ou 'Aguardando'. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado. Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento. | 6 = Data inicial inválida. Padrão esperado: AAAA-MM-DD. | 7 = Data final inválida. Padrão esperado: AAAA-MM-DD.</documentation>
+      <input message="tns:BuscaTodasGuiasComErroSoapRequest"/>
+      <output message="tns:BuscaTodasGuiasComErroSoapResponse"/>
+    </operation>
+    <operation name="BuscaGuia">
+      <documentation>Busca Guia(s) específica(s) através do CNPJ do emitente e do número do recibo (que pode ser mais de um), independente do status da guia. Lista de Erros: 0 = Sucesso | 1 = Não autorizado, Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento.</documentation>
+      <input message="tns:BuscaGuiaSoapRequest"/>
+      <output message="tns:BuscaGuiaSoapResponse"/>
+    </operation>
+    <operation name="BuscaGuiaPDF">
+      <documentation>Busca Guia(s) específica(s) através do CNPJ do emitente e do número do recibo (que pode ser mais de um), independente do status da guia. Lista de códigos de retorno: 0 = Sucesso | 1 = Não autorizado, Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Erro ao transmitir o lote de guias. | 4 = Falha ao buscar guias. | 5 = Falha ao gerar o PDF.</documentation>
+      <input message="tns:BuscaGuiaPDFSoapRequest"/>
+      <output message="tns:BuscaGuiaPDFSoapResponse"/>
+    </operation>
+    <operation name="Assinatura_gratis">
+      <documentation>Assinatura Grátis é utilizado para criar o cadastro do utilizador do serviço. Tabela de erros: 0 = Sucesso | 1 = Login não é um e-mail válido. | 2 = Login em uso, tente outro. | 3 = Senha deve estar entre 6 e 10 dígitos. | 4 = Razão Social não pode estar em branco. | 5 = Fantasia não pode estar em branco. | 6 = Telefone deve estar entre 10 e 11 dígitos. | 7 = Cep deve conter 8 dígitos. | 8 = Logradouro não pode estar em branco. | 9 = Nro não pode ficar em branco, caso nao tenha número no endereço, preencher com S/N. | 10 = Bairro não pode estar em branco. | 11 = Código da UF é inválido. | 12 = Código do Município é inválido. | 13 = Telefone contém digítos não numéricos. | 14 = CEP contém digítos não numéricos. | 15 = CNPJ é inválido. | 16 = CNPJ em uso por outra assinatura. | 17 = Nome do responsável pela assinatura não pode estar em branco. | 18 = Erro ao gravar a conta do usuário. | 19 = Erro ao gravar os dados da empresa. | 20 = Erro ao criar a assinatura na forma de pagamento grátis.</documentation>
+      <input message="tns:Assinatura_gratisSoapRequest"/>
+      <output message="tns:Assinatura_gratisSoapResponse"/>
+    </operation>
+  </portType>
+  <binding name="GeraGuiaGnreSoapBinding" type="tns:GeraGuiaGnreSoapType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GeraGuia">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GeraGuiaPDF">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuiasPendentes">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaTodasGuiasPendentes">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaTodasGuiasComErro">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuia">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuiaPDF">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Assinatura_gratis">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <binding name="GeraGuiaGnreSoapBinding12" type="tns:GeraGuiaGnreSoapType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GeraGuia">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GeraGuiaPDF">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuiasPendentes">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaTodasGuiasPendentes">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaTodasGuiasComErro">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuia">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="BuscaGuiaPDF">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="Assinatura_gratis">
+      <soap12:operation soapAction="" style="document"/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="GeraGuiaGnre">
+    <documentation>O portal GuiasGNRE.com.br oferece a possibilidade de gerar suas guias de recolhimento de tributos estaduais para todos os Estados que disponibilizaram portais para emissão e validação das guias. Através do portal GuiasGNRE.com.br você gera em um só lugar suas guias DIFAL, FCOP e ICMS ST de forma rápida, e prática, através das informações contidas nos XML's de suas notas fiscais.Lista de códigos de retorno para as funções chamadas: 0 = Sucesso | 1 = Não autorizado, Verifique o CNPJ, Usuário e Token. | 2 = Lote processado com pendências. | 3 = Nenhuma guia liberada no momento. | 4 = Falha ao buscar guias. | 5 = Falha ao gerar o PDF. | 6 = Data inicial inválida. Padrão esperado: AAAA-MM-DD. | 7 = Data final inválida. Padrão esperado: AAAA-MM-DD.</documentation>
+    <port name="GeraGuiaGnreSoap" binding="tns:GeraGuiaGnreSoapBinding">
+      <soap:address location="https://www.guiasgnre.com.br/webgnre/GeraGuiaGnre.wso"/>
+    </port>
+    <port name="GeraGuiaGnreSoap12" binding="tns:GeraGuiaGnreSoapBinding12">
+      <soap12:address location="https://www.guiasgnre.com.br/webgnre/GeraGuiaGnre.wso"/>
+    </port>
+  </service>
+</definitions>

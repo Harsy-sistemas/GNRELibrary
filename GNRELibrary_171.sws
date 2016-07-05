@@ -1,8 +1,0 @@
-[Properties]
-Version=17.1
-[WorkspacePaths]
-ConfigFile=.\Programs\Config.ws
-[TestProjects]
-TestWindowsProject=desenvolvimento.src
-[Projects]
-Project0=desenvolvimento.src
