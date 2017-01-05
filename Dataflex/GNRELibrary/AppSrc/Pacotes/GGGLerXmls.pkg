@@ -99,6 +99,10 @@ Function GGGLerXmls Global String[] saListaXmls String sCNPJ Returns tWStListaNf
 
                             End
 
+                            Get ChildElementNS of hoDest "http://www.portalfiscal.inf.br/nfe" "IE" to hoAux
+                            Get psText of hoaux to NFEs.itens[iQtd_nfes].IE
+                            Send Destroy of hoAux
+
                             Get ChildElementNS of hoprotNFe "http://www.portalfiscal.inf.br/nfe" "infProt" to hoinfProt
                             If hoinfProt ;
                             Begin
